@@ -9,7 +9,7 @@
       body,html {
       background-image: url("https://raw.githubusercontent.com/45rfew/Extra-stuff/master/5c4z5e79mny21.jpg");
       background-position: center;
-      background-repeat: no-repeat; 
+      background-repeat: repeat; 
       background-size: cover;
       height: 100%;
       text-align: center;
@@ -29,9 +29,12 @@
       margin-right: auto;
       }
       .mast {
-      background-color: rgb(30, 144, 255,.8);
+ z-index: 1;
+      position: -webkit-sticky;
+      position: sticky;
+      top: 0;
+      background-color: rgb(30, 144, 255,1);
       font-size: 50px;
-      position: relative;
       bottom: 0;
       transition: bottom 0.2s ease-in, background-color 0.2s ease-in;
       border: 3px solid #000000;
@@ -41,11 +44,12 @@
       background-color: #067DCC;
       }
       .main{
+ z-index: 0;
       filter: brightness(110%) hue-rotate(220deg) drop-shadow(4px 4px 4px #000000);
       position: relative;
       top: 0;
       padding: 0;
-      border: 0 solid #000;
+      border: 0 solid #00000000;
       border-radius: 0;
       transition: top 0.3s ease, padding 0.3s ease, border-width 0.3s ease, border-radius 0.3s ease;
       }
@@ -55,19 +59,62 @@
       border-width: 2px;
       border-radius: 2px;
       }
+      .china {
+      postion: absolute;
+      text-align: "left";
+      margin:0px 90px;
+      position: relative;
+      padding: 0;
+      border: 0 solid #000;
+      border-radius: 0;
+      transition: padding 0.3s ease, border-width 0.3s ease, border-radius 0.3s ease;
+      }
+      .china:hover {
+      padding: 5px;
+      }
+      .chiana {
+      postion: absolute;
+      margin:0px 90px;
+      position: relative;
+      padding: 0;
+      border: 0 solid #000;
+      border-radius: 0;
+      transition: padding 0.3s ease, border-width 0.3s ease, border-radius 0.3s ease;
+      }
+      .chiana:hover {
+      padding: 5px;
+      }
+      .chinaa {
+      postion: absolute;
+      text-align: "right";
+      margin:0px 90px;
+      position: relative;
+      padding: 0;
+      border: 0 solid #000;
+      border-radius: 0;
+      transition: padding 0.3s ease, border-width 0.3s ease, border-radius 0.3s ease;
+      }
+      .chinaa:hover {
+      padding: 5px;
+      }
     </style>
   </head>
   <body>
     <div class = "mast">
-      <table style="width:100%">
+      <table style="width:95%">
         <tr>
-          <th style="width:260px"><img src="/logo.JPG" height=100 width=250></img></th>
+          <th style="width:260px"><img src="logo.jpg" height=100 width=250></img></th>
           <th colspan="1" style="text-align:left">   ‍  Universal Travel</th>
         </tr>
       </table>
     </div>
     <div class = "main">
-      <img src="/map.JPG" height=300 width=900  class="center"></img>
+      </br><img src="map.jpg" height=300 width=900  class="center"></img></br>
+    </div>
+    <div class = "cards">
+      <img class = "china" src="China.jpg" height=300 width=200></img>
+      <img class = "chinaa"  src="China.jpg" height=300 width=200></img>
+      <img class = "chiana" src="China.jpg" height=300 width=200></img>
     </div>
   </body>
 </html>
