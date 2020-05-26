@@ -1,201 +1,73 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title></title>
-  <style>
-  html, body {
-    height: 100%;
-    margin: 0;
-  }
-  body {
-    background: black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  canvas {
-    border: 1px solid white;
-  }
-  #p1
-  {
-    color:red;
-	position:absolute;
-	left:100px;
-	top:10px;
-  }
-    #p2
-  {
-    color:red;
-	position:absolute;
-	left:100px;
-	top:30px;
-  }
-  #score
-  {
-    color:yellow;
-    position:absolute;
-	left:155px;
-	top:10px;
-  }
-  #high
-  {
-    color:yellow;
-    position:absolute;
-	left:195px;
-	top:30px;
-  }
-  </style>
-</head>
-<body>
-<p id="p1">SCORE:</p>
-<p id="p2">HIGHSCORE:</p>
-<p id="score"></p>
-<p id="high"></p>
-<canvas width="400" height="400" id="game"></canvas>
-<script>
-var canvas = document.getElementById('game');
-var context = canvas.getContext('2d');
-var grid = 16;
-var count = 0;
-var score=0;
-var max=0;  
-
-var snake = {
-  x: 160,
-  y: 160,
-  
-  // snake velocity. moves one grid length every frame in either the x or y direction
-  dx: grid,
-  dy: 0,
-  
-  // keep track of all grids the snake body occupies
-  cells: [],
-  
-  // length of the snake. grows when eating an apple
-  maxCells: 4
-};
-var apple = {
-  x: 320,
-  y: 320
-};
-
-// get random whole numbers in a specific range
-// @see https://stackoverflow.com/a/1527820/2124254
-function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min)) + min;
-}
-// game loop
-function loop() {
-  requestAnimationFrame(loop);
-  // slow game loop to 15 fps instead of 60 (60/15 = 4)
-  if (++count < 4) {
-    return;
-  }
-  count = 0;
-  context.clearRect(0,0,canvas.width,canvas.height);
-  // move snake by it's velocity
-  snake.x += snake.dx;
-  snake.y += snake.dy;
-  // wrap snake position horizontally on edge of screen
-  if (snake.x < 0) {
-    snake.x = canvas.width - grid;
-  }
-  else if (snake.x >= canvas.width) {
-    snake.x = 0;
-  }
-  
-  // wrap snake position vertically on edge of screen
-  if (snake.y < 0) {
-    snake.y = canvas.height - grid;
-  }
-  else if (snake.y >= canvas.height) {
-    snake.y = 0;
-  }
-  // keep track of where snake has been. front of the array is always the head
-  snake.cells.unshift({x: snake.x, y: snake.y});
-  // remove cells as we move away from them
-  if (snake.cells.length > snake.maxCells) {
-    snake.cells.pop();
-  }
-  // draw apple
-  context.fillStyle = 'red';
-  context.fillRect(apple.x, apple.y, grid-1, grid-1);
-  // draw snake one cell at a time
-  context.fillStyle = 'green';
-  snake.cells.forEach(function(cell, index) {
-    
-    // drawing 1 px smaller than the grid creates a grid effect in the snake body so you can see how long it is
-    context.fillRect(cell.x, cell.y, grid-1, grid-1);  
-    // snake ate apple
-    if (cell.x === apple.x && cell.y === apple.y) {
-      snake.maxCells++;
-	  score+=10;
-	  //max=score;
-	  document.getElementById('score').innerHTML=score;
-	
-      // canvas is 400x400 which is 25x25 grids 
-      apple.x = getRandomInt(0, 25) * grid;
-      apple.y = getRandomInt(0, 25) * grid;
-    }
-    // check collision with all cells after this one (modified bubble sort)
-    for (var i = index + 1; i < snake.cells.length; i++)
-	{
-      
-      // snake occupies same space as a body part. reset game
-      if (cell.x === snake.cells[i].x && cell.y === snake.cells[i].y) 
-	 { 
-	 
-	    if(score>max)
-	    {
-	     max=score;
-	    }
-    	snake.x = 160;
-        snake.y = 160;
-        snake.cells = [];
-        snake.maxCells = 4;
-        snake.dx = grid;
-        snake.dy = 0;
-		score=0;
-        apple.x = getRandomInt(0, 25) * grid;
-        apple.y = getRandomInt(0, 25) * grid;
-	    document.getElementById('high').innerHTML=max;
+  <title>Bruh</title>
+  <link rel="shortcut icon" href="https://raw.githubusercontent.com/45rfew/Starblast-mods-n-objs/master/yeetus.png">
+  <link rel="stylesheet"href="https://fonts.googleapis.com/css?family=Roboto+Sans">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <head>
+    <style>
+      body,html {
+      background-image: url("https://raw.githubusercontent.com/45rfew/Extra-stuff/master/5c4z5e79mny21.jpg");
+      background-position: center;
+      background-repeat: no-repeat; 
+      background-size: cover;
+      height: 100%;
+      text-align: center;
+      font-size: 19px;
       }
-    }
-  }
-  
-  );
-  
-}
-// listen to keyboard events to move the snake
-document.addEventListener('keydown', function(e) {
-  // prevent snake from backtracking on itself by checking that it's 
-  // not already moving on the same axis (pressing left while moving
-  // left won't do anything, and pressing right while moving left
-  // shouldn't let you collide with your own body)
-  
-  // left arrow key
-  if (e.which === 37 && snake.dx === 0) {
-    snake.dx = -grid;
-    snake.dy = 0;
-  }
-  // up arrow key
-  else if (e.which === 38 && snake.dy === 0) {
-    snake.dy = -grid;
-    snake.dx = 0;
-  }
-  // right arrow key
-  else if (e.which === 39 && snake.dx === 0) {
-    snake.dx = grid;
-    snake.dy = 0;
-  }
-  // down arrow key
-  else if (e.which === 40 && snake.dy === 0) {
-    snake.dy = grid;
-    snake.dx = 0;
-  }
-});
-// start the game
-requestAnimationFrame(loop);
-</script>
-</body>
+      table,
+      th,
+      td {
+      border: 0px solid black;
+      border-collapse: collapse;
+      text-align: center
+      }
+      a:link, a:visited, a:hover, a:active { color:green; }
+      .center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      }
+      .mast {
+      background-color: rgb(30, 144, 255,.8);
+      font-size: 50px;
+      position: relative;
+      bottom: 0;
+      transition: bottom 0.2s ease-in, background-color 0.2s ease-in;
+      border: 3px solid #000000;
+      }
+      .mast:hover {
+      bottom: 2px;
+      background-color: #067DCC;
+      }
+      .main{
+      filter: brightness(110%) hue-rotate(220deg) drop-shadow(4px 4px 4px #000000);
+      position: relative;
+      top: 0;
+      padding: 0;
+      border: 0 solid #000;
+      border-radius: 0;
+      transition: top 0.3s ease, padding 0.3s ease, border-width 0.3s ease, border-radius 0.3s ease;
+      }
+      .main:hover {
+      top: 8px;
+      padding: 3px;
+      border-width: 2px;
+      border-radius: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class = "mast">
+      <table style="width:100%">
+        <tr>
+          <th style="width:260px"><img src="logo.jpg" height=100 width=250></img></th>
+          <th colspan="1" style="text-align:left">   ‍  Universal Travel</th>
+        </tr>
+      </table>
+    </div>
+    <div class = "main">
+      <img src="map.jpg" height=300 width=900  class="center"></img>
+    </div>
+  </body>
 </html>
