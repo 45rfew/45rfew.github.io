@@ -47,6 +47,14 @@
       border: 5px solid white;
       color: white;
       }
+      .pic {
+       	position: relative;
+        top: 0;
+        transition: top 0.4s ease;  
+      }
+      .pic:hover {
+        top: 14px;
+      }
     </style>
   </head>
   <body>
@@ -67,7 +75,9 @@
 Uranus is slightly larger in diameter than its neighbor Neptune, yet smaller in mass. It is the second least dense planet; Saturn is the least dense of all.
 
 Uranus gets its blue-green color from methane gas in the atmosphere. Sunlight passes through the atmosphere and is reflected back out by Uranus' cloud tops. Methane gas absorbs the red portion of the light, resulting in a blue-green color.</th>
-          <th><img src="uranuspic.jpg" height=350 width=550></img></th>
+          <div class = "pic">
+            <th><img src="uranuspic.jpg" height=350 width=550></img></th>
+          </div>
         </tr>
       </table>
     </div>
