@@ -47,6 +47,14 @@
       border: 5px solid white;
       color: white;
       }
+      .pic {
+       	position: relative;
+        top: 0;
+        transition: top 0.4s ease;  
+      }
+      .pic:hover {
+        top: 14px;
+      }      
     </style>
   </head>
   <body>
@@ -63,7 +71,9 @@
       <table style="width:100%">
         <tr>
           <th style="text-align:center" >China, officially the People's Republic of China, is a country in East Asia. It is the world's most populous country, with a population of around 1.428 billion in 2017. Covering approximately 9.6 million square kilometres, it is the world's third or fourth largest country by area. With more than 4,000 years of recorded history, China is one of the few existing countries that also flourished economically and culturally in the earliest stages of world civilization. Indeed, despite the political and social upheavals that frequently have ravaged the country, China is unique among nations in its longevity and resilience as a discrete politico-cultural unit. Much of China’s cultural development has been accomplished with relatively little outside influence, the introduction of Buddhism from India constituting a major exception. Even when the country was penetrated by such “barbarian” peoples as the Manchu, these groups soon became largely absorbed into the fabric of Han Chinese culture.</th>
-          <th><img src="chinapic.jpg" height=300 width=550></img></th>
+          <div class = "pic">
+            <th><img src="chinapic.jpg" height=300 width=550></img></th>
+          </div>
         </tr>
       </table>
     </div>
